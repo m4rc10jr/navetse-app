@@ -1,0 +1,21 @@
+{
+  "[vue]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.fontSize": 11,
+    "editor.fontLigatures": true,
+  },
+  "editor.minimap.size": "fit",
+  "nuxt.isNuxtApp": true,
+  "nuxt.portNumber": 8080,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "dist": true,
+    ".nuxt": true
+  }
+}

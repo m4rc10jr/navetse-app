@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "files": [
+    "./**/*.js"
+  ],
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true
+  }
+}

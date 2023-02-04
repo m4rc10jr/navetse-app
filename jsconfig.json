@@ -1,0 +1,8 @@
+{
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true,
+    "extensions": [
+      ".vue"
+    ]
+  },
+}

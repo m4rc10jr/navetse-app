@@ -1,0 +1,147 @@
+<template>
+  <v-btn @click.stop="print" color="primary darken-1" dark outlined>
+    <custom-icon>picture_as_pdf</custom-icon>
+    <span class="ml-1">Imprimir</span>
+    <div class="container print" :id="id" style="display: none">
+      <slot :data="data"></slot>
+
+      <h3>Parcelas</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Parcela</th>
+            <th>Pagamento via</th>
+            <th>Status</th>
+            <th>Valor</th>
+            <th>Data do Recebimento</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            v-for="(installment, index) in data.installments"
+            :key="`installment-${index}`"
+          >
+            <td>{{ installment.id }}</td>
+            <td>{{ index == 0 ? 1 : index + 1 }}</td>
+            <td>{{ installment.type.title }}</td>
+            <td>{{ installment.status }}</td>
+            <td>{{ installment.value | brl }}</td>
+            <td>{{ installment.receipt_date | formatDate('DD/MM/YYYY') }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Criando Em</th>
+            <th>Criado Por</th>
+            <th>Última Atualização</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.created_at }}</td>
+            <td>{{ createBy }}</td>
+            <td>{{ data.updated_at }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </v-btn>
+</template>
+
+<script>
+import { randomBytes } from 'crypto'
+import { capitalize, take } from 'lodash'
+
+export default {
+  props: {
+    data: Object,
+  },
+
+  computed: {
+    id() {
+      return 'print_' + randomBytes(8).toString('hex')
+    },
+
+    createBy() {
+      if (!this.data?.user?.name) return false
+
+      let newValue = String(this.data?.user?.name)
+
+      return newValue
+        ? take(newValue.split(' ').map(capitalize), 2).join(' ')
+        : '---'
+    },
+  },
+
+  methods: {
+    open() {
+      let windowRef = null
+
+      windowRef = window.open(
+        '',
+        '',
+        'fullscreen=no,titlebar=no,scrollbars=no,width=1000,height=660'
+      )
+
+      if (!windowRef.opener) {
+        windowRef.opener = self
+      }
+
+      windowRef.focus()
+
+      return windowRef
+    },
+
+    applyStyles(win) {
+      const styles = [
+        'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+      ]
+
+      styles.forEach((style) => {
+        let link = win.document.createElement('link')
+
+        link.setAttribute('rel', 'stylesheet')
+        link.setAttribute('type', 'text/css')
+        link.setAttribute('href', style)
+
+        win.document.getElementsByTagName('head')[0].appendChild(link)
+      })
+    },
+
+    print() {
+      var divContents = document.getElementById(this.id).innerHTML
+
+      var a = this.open()
+
+      a.document.write(`
+        <html>
+          <head>
+            <title>NAVETSE</title>
+          </head>
+          <body>${divContents}</body>
+        </html>
+      `)
+
+      this.applyStyles(a)
+
+      setTimeout(() => {
+        a.document.close()
+        a.focus()
+        a.print()
+        setTimeout(function () {
+          a.close()
+        }, 1)
+        cb()
+      }, 1000)
+    },
+  },
+}
+</script>

@@ -1,0 +1,34 @@
+/*
+ | ----------------------------------------------------------------------------------
+ |
+ |  Customize inputs
+ |
+ | ----------------------------------------------------------------------------------
+ */
+
+.switch-label-column {
+  margin-top: 0;
+  padding-top: 0;
+
+  .v-input__slot {
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    .v-input--selection-controls__input {
+      order: 1;
+      margin-top: .5rem;
+    }
+
+    .v-label {
+      order: 0;
+      font-size: 13px;
+    }
+  }
+}
+
+.row.mobile {
+  >.col.d-flex {
+    flex-direction: column !important;
+  }
+}

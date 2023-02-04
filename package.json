@@ -1,0 +1,42 @@
+{
+  "name": "dashboard-base",
+  "version": "1.0.3",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint:prettier": "prettier --check .",
+    "lint": "yarn lint:prettier",
+    "lintfix": "prettier --write --list-different ."
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "chart.js": "^3.8.0",
+    "core-js": "^3.19.3",
+    "glob": "^7.2.0",
+    "image-preview-vue": "^1.2.11",
+    "jspdf": "^2.5.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "nuxt": "^2.15.8",
+    "vue": "^2.6.14",
+    "vue-chartjs": "^4.1.0",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "vue-the-mask": "^0.11.1",
+    "vuelidate": "^0.7.7",
+    "vuetify": "^2.6.1",
+    "vuetify-money": "^1.2.0",
+    "vuex-persistedstate": "^4.1.0",
+    "webpack": "^4.46.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.12.3",
+    "@types/lodash": "^4.14.182",
+    "@types/vuelidate": "^0.7.15",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1"
+  }
+}

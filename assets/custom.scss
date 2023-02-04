@@ -1,0 +1,73 @@
+.theme--light.v-application {
+  background: #f9f9f9;
+}
+
+.theme--light.v-app-bar.v-toolbar.v-sheet {
+  background-color: f9f9f9;
+}
+
+.v-data-table-header-mobile__wrapper {
+  margin: 1rem 0;
+
+  .theme--light.v-select .v-select__selections {
+    margin-top: 10px;
+  }
+}
+
+.v-data-table {
+  tr {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.v-navigation-drawer__content {
+  .v-list-group.v-list-group--active {
+    color: white !important;
+  }
+
+  .v-list-item__title {
+    font-size: 15px;
+  }
+
+  .v-list-item__action:first-child,
+  .v-list-item__icon:first-child {
+    margin-right: 14px;
+  }
+
+  .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .v-list-group__items .v-list-item {
+    padding-left: 32px;
+  }
+}
+
+
+div.dynamic-list {
+  padding: 0;
+
+  .v-list-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.55);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.kbd {
+  background-color: #eee !important;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+  color: #333 !important;
+  display: inline-block;
+  font-size: .85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+ }
