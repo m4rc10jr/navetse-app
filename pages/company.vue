@@ -12,18 +12,7 @@
           </column>
 
           <column md="8">
-            <input-text
-              label="BI URL"
-              v-bind:value="
-                encodeURI(
-                  `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq ` +
-                    `'` +
-                    form.name +
-                    `'`
-                )
-              "
-              disabled
-            />
+            <input-text label="BI URL" v-model="form.bi_url" disabled />
           </column>
         </v-row>
 
@@ -261,12 +250,12 @@ export default {
 
     beforeSave(data) {
       const { companies = [], report, ...form } = data
-      form.bi_url = encodeURI(
-        `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq ` +
-          `'` +
-          form.name +
-          `'`
-      )
+      // form.bi_url = encodeURI(
+      //   `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq ` +
+      //     `'` +
+      //     form.name +
+      //     `'`
+      // )
       return {
         ...form,
         companies: companies.map((h) => h.id),

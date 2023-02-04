@@ -6,7 +6,7 @@
           label="Nome"
           v-model.trim="form.name"
           :errors="watchErrorMessages('name')"
-          @input="$v.form.name.$touch"
+          @input="inputName($v)"
         />
       </column>
 
@@ -17,6 +17,7 @@
           type="url"
           v-model="form.bi_url"
           @input="$v.form.bi_url.$touch"
+          disabled
           :errors="watchErrorMessages('bi_url')"
         />
       </column>
@@ -217,6 +218,16 @@ export default {
         main: is_main,
         companies: companies.map((h) => h.id),
       }
+    },
+    inputName(event) {
+      this.form.bi_url = encodeURI(
+        `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq ` +
+          `'` +
+          this.form.name +
+          `'`
+      )
+      event.form.name.$touch
+      event.form.bi_url.$touch
     },
   },
 
