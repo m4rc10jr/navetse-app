@@ -64,7 +64,7 @@
         <v-list-item-subtitle>
           <div class="d-flex flex-column">
             <span class="mt-2">
-              Custo: <b>{{ item.cost | brl }}</b>
+              Custo: <b>{{ cost(item) | brl }}</b>
             </span>
             <span class="mt-1">
               Preço Sugerido: <b>{{ item.suggested_price | brl }}</b>
@@ -133,6 +133,16 @@ export default {
         name: this.pageName,
         params: { id: item?.id ?? 'create' },
       })
+    },
+    cost(item) {
+      if (item.products && item.products.length > 0) {
+        return (
+          Number(item.cost) +
+          item.products.map((e) => Number(e.cost)).reduce((a, b) => a + b, 0)
+        )
+      } else {
+        return item.cost
+      }
     },
   },
 }

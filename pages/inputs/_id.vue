@@ -81,7 +81,7 @@
                 <v-layout row>
                   <column md="3">
                     <input-competence-date
-                      v-model="$v.form.competence_date.$model"
+                      v-model.trim="$v.form.competence_date.$model"
                       :error-messages="watchErrorMessages('competence_date')"
                     />
                   </column>
@@ -277,7 +277,7 @@
           color="primary"
           :loading="loading"
           depressed
-          :disabled="!isValid"
+          :disabled="!isValid || form.installments.length == 0"
           @click="save(form)"
           >Salvar</v-btn
         >

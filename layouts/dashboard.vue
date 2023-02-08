@@ -268,6 +268,12 @@ export default {
           to: '/admin/units',
           can: 'root',
         },
+        // {
+        //   icon: 'scale',
+        //   title: 'Grupos',
+        //   to: '/admin/groups',
+        //   can: 'root',
+        // },
         {
           icon: 'settings',
           title: 'Cidades',

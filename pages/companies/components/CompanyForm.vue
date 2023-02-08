@@ -181,7 +181,7 @@ export default {
       has_cost_product_register: {},
       has_cost_product_order_production: {},
       has_cost_product_global: {},
-      bi_url: { url },
+      bi_url: {},
       main: {},
       companies: [],
     },

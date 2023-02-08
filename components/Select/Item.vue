@@ -100,6 +100,7 @@ export default {
         'includes[unit]': 'id,symbol,title',
         'scope[search]': this.search,
         limit: this.limit,
+        'product[load]': true,
       }
 
       const data = await this.$axios.$get('/api/items', { params })

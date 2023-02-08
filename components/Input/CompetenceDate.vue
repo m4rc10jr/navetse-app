@@ -37,6 +37,7 @@ export default {
     model: {
       get() {
         if (!this.value) {
+          console.log('data 1', this.$helper.moment().format('YYYY-MM-01'))
           this.$emit('input', this.$helper.moment().format('YYYY-MM-01'))
         }
 
@@ -49,6 +50,10 @@ export default {
     },
 
     dates() {
+      console.log(
+        'Mês de Compe',
+        orderBy(this.$helper.monthGenerator(), (h) => h.value, 'asc')
+      )
       return orderBy(this.$helper.monthGenerator(), (h) => h.value, 'asc')
     },
   },

@@ -208,7 +208,7 @@
           color="primary"
           :loading="loading"
           depressed
-          :disabled="!isValid"
+          :disabled="!isValid || form.installments.length == 0"
           @click="save(form)"
           >Salvar</v-btn
         >

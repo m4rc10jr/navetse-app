@@ -103,6 +103,7 @@ export default {
 
       let params = {
         'scope[search][all]': search,
+        'scope[search][paymentsnot]': true,
         'scope[withTrashed]': Date.now(),
         'where[type_payment_id]': 9, // cheque de cliente
         select: 'id,value,code',

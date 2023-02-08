@@ -3,7 +3,7 @@ export default {
     endpoint: '/api/items',
     ttl: -1,
     options: {
-      select: 'id,unit_id,title,cost,suggested_price,department_id',
+      select: 'id,unit_id,title,cost,suggested_price',
       'includes[unit]': 'id,symbol,title',
       limit: 100,
       'scope[withTrashed]': true

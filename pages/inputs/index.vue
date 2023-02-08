@@ -32,7 +32,15 @@
             item-text="title"
           />
         </v-col>
-
+        <v-col md="3">
+          <select-dynamic
+            label="Envolvidos"
+            no-api-data
+            :data="filter.data.entities"
+            v-model="filter.column.provider_id"
+            item-text="name"
+          />
+        </v-col>
         <v-col md="3">
           <select-dynamic
             label="Sub Conta"
@@ -158,6 +166,7 @@ export default {
         id: null,
         account_id: null,
         sub_account_id: null,
+        provider_id: null,
         status: null,
         competence_date: null,
       },
@@ -166,6 +175,7 @@ export default {
         accounts: [],
         sub_accounts: [],
         status: [],
+        entities: [],
       },
 
       collection: 'inputs',
