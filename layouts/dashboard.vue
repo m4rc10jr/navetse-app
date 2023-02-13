@@ -11,8 +11,23 @@
         <utils-show :condition="!clipped">
           <v-list-item>
             <v-list-item-content class="justify-center my-1 logo">
-              <div style="max-width: 170px">
+              <div
+                style="
+                  max-width: 170px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-direction: column;
+                "
+              >
+                <!-- <div class="logo-img"> -->
+                <!-- <img v-if="!mainCompany.logo" src="~/static/logo.png" /> -->
+                <img
+                  v-if="mainCompany.logo && !isRoot"
+                  :src="mainCompany.logo"
+                />
                 <h1 class="heading">NAVETSE</h1>
+                <!-- </div> -->
               </div>
             </v-list-item-content>
           </v-list-item>
@@ -268,12 +283,6 @@ export default {
           to: '/admin/units',
           can: 'root',
         },
-        // {
-        //   icon: 'scale',
-        //   title: 'Grupos',
-        //   to: '/admin/groups',
-        //   can: 'root',
-        // },
         {
           icon: 'settings',
           title: 'Cidades',
@@ -394,12 +403,12 @@ export default {
           : `${firtName} <b>(${this.company.name})</b>`)
       )
     },
-
     ...mapGetters({
       user: 'account/data',
       company: 'account/company',
       isRoot: 'account/isRoot',
       loading: 'request/loading',
+      mainCompany: 'account/companyInUse',
     }),
   },
 
@@ -418,7 +427,11 @@ export default {
 <style lang="scss">
 @import '~/assets/custom.scss';
 @import '~/assets/form.scss';
-
+.logo img {
+  object-fit: scale-down;
+  width: 100%;
+  max-height: 100px;
+}
 .logo {
   h1 {
     text-shadow: rgba(0, 0, 0, 0.5) 2px 2px;

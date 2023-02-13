@@ -1,5 +1,11 @@
 <template>
-  <v-btn @click.stop="print" color="primary darken-1" dark outlined>
+  <v-btn
+    @click.stop="print"
+    :disabled="disabled"
+    color="primary darken-1"
+    dark
+    outlined
+  >
     <custom-icon>picture_as_pdf</custom-icon>
     <span class="ml-1">Imprimir</span>
     <div class="container print" :id="id" style="display: none">
@@ -9,7 +15,8 @@
           <div class="row" style="width: 100%">
             <div class="col col-md-3 d-flex">
               <div class="logo">
-                <img src="~/static/logo.png" />
+                <img v-if="!logo" src="~/static/logo.png" />
+                <img v-if="logo" :src="logo" />
               </div>
             </div>
 
@@ -264,7 +271,7 @@ export default {
     },
     type: String,
   },
-
+  data: () => ({ logo: '', disabled: false }),
   computed: {
     id() {
       return 'print_' + randomBytes(8).toString('hex')
@@ -286,6 +293,15 @@ export default {
   },
 
   methods: {
+    async getCompany() {
+      let navetse_store = JSON.parse(
+        window.sessionStorage.getItem('navetse_store')
+      )
+
+      let companye_id = navetse_store.account.companySelected.id
+      let res = await this.$axios.$get(`/api/companies/${companye_id}`)
+      this.logo = res.logo
+    },
     open() {
       let windowRef = null
 
@@ -295,7 +311,7 @@ export default {
         'fullscreen=no,titlebar=no,scrollbars=no,width=1000,height=660'
       )
 
-      if (!windowRef.opener) {
+      if (!windowRef?.opener) {
         windowRef.opener = self
       }
 
@@ -321,6 +337,9 @@ export default {
     },
 
     async print() {
+      this.disabled = true
+      await this.getCompany()
+
       var divContents = document.getElementById(this.id).innerHTML
 
       var a = this.open()
@@ -390,6 +409,7 @@ export default {
         a.document.close()
         a.focus()
         a.print()
+        this.disabled = false
         setTimeout(() => a.close(), 100)
       }, 1000)
     },

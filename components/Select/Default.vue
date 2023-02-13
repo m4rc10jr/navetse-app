@@ -1,15 +1,29 @@
 <template>
-  <component
-    :is="component"
-    v-model.trim="model"
-    :error-messages="errors"
-    :label="label"
-    :items="itemsMapped"
-    outlined
-    dense
-    hide-details
-    v-bind="syncOptions"
-  />
+  <KeepAlive>
+    <v-select
+      v-model.trim="model"
+      :error-messages="errors"
+      :label="label"
+      :items="itemsMapped"
+      outlined
+      dense
+      hide-details
+      v-bind="syncOptions"
+      v-if="!autocomplete"
+    />
+
+    <v-autocomplete
+      v-model.trim="model"
+      :error-messages="errors"
+      :label="label"
+      :items="itemsMapped"
+      outlined
+      dense
+      hide-details
+      v-bind="syncOptions"
+      v-else
+    />
+  </KeepAlive>
 </template>
 
 <script>

@@ -26,6 +26,7 @@
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "vue-the-mask": "^0.11.1",
+    "vue3-img-input": "^1.2.1",
     "vuelidate": "^0.7.7",
     "vuetify": "^2.6.1",
     "vuetify-money": "^1.2.0",

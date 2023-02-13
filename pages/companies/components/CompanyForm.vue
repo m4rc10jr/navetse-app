@@ -54,6 +54,9 @@
                     class="mt-0"
                   />
                 </column>
+                <column md="12">
+                  <uploader-logo :logo="form.logo" @send="prepareFiles" />
+                </column>
                 <v-slide-y-transition>
                   <column md="12" class="my-2" v-if="form.main">
                     <select-dynamic
@@ -181,8 +184,9 @@ export default {
       has_cost_product_register: {},
       has_cost_product_order_production: {},
       has_cost_product_global: {},
-      bi_url: {},
+      bi_url: { url },
       main: {},
+      logo: {},
       companies: [],
     },
 
@@ -195,6 +199,7 @@ export default {
       has_cost_product_order_production: false,
       has_cost_product_global: false,
       bi_url: null,
+      logo: null,
       main: false,
       companies: [],
     },
@@ -228,6 +233,10 @@ export default {
       )
       event.form.name.$touch
       event.form.bi_url.$touch
+    },
+    prepareFiles(logo) {
+      this.form.logo = logo
+      this.$forceUpdate()
     },
   },
 

@@ -13,8 +13,8 @@
     @click:clear="$emit('input', null)"
   >
     <!-- <template v-slot:selection="{ item }">
-      {{ selection(item.text) }}
-    </template> -->
+    {{ selection(item.text) }}
+  </template> -->
   </v-autocomplete>
 </template>
 
@@ -63,6 +63,11 @@ export default {
     itemText: {
       type: String | Function,
       default: 'name',
+    },
+
+    itemValue: {
+      type: String | Function,
+      default: 'id',
     },
 
     noApiData: {
@@ -157,7 +162,10 @@ export default {
             typeof this.itemText === 'string'
               ? get(h, this.itemText)
               : this.itemText(h),
-          value: h.id,
+          value:
+            typeof this.itemValue === 'string'
+              ? get(h, this.itemValue)
+              : this.itemValue(h),
           item: { ...h },
         }
       })
@@ -194,7 +202,7 @@ export default {
       const params = {
         'orderBy[id]': 'desc',
         'scope[search]': this.search,
-        'scope[withTrashed]': Date.now(),
+        // 'scope[withTrashed]': Date.now(),
       }
 
       if (this.requestOptions) {

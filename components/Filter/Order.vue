@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%">
-    <v-layout row class="ma-2 mx-1">
+    <v-row class="ma-0" :class="{ 'flex-column': isMobile, 'mb-2': !isMobile }">
       <v-col md="3">
         <input-date
           label="Data Operação"
@@ -28,13 +28,18 @@
           v-model="model.item"
         />
       </v-col>
-    </v-layout>
+    </v-row>
 
-    <v-layout row class="mt-0 mx-1">
-      <v-col md="3" v-if="hasSale" class="pt-0 mb-3">
+    <v-row class="ma-0" :class="{ 'flex-column': isMobile }">
+      <v-col
+        md="3"
+        v-if="hasSale"
+        class="pt-0"
+        :class="{ 'mb-0 mt-1': isMobile, 'mb-3': !isMobile }"
+      >
         <select-default label="Status" v-model="model.status" :items="status" />
       </v-col>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 
@@ -65,6 +70,10 @@ export default {
       set(value) {
         this.$emit('input', value)
       },
+    },
+
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown
     },
   },
 }

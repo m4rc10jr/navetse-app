@@ -13,25 +13,23 @@
       }"
     >
       <template v-slot:filters>
-        <v-layout row class="mt-1 mx-1">
-          <v-col md="3">
-            <input-date
-              label="Data Operação"
-              v-model="filter.column.date"
-              :default-date="false"
-            />
-          </v-col>
+        <v-col md="3">
+          <input-date
+            label="Data Operação"
+            v-model="filter.column.date"
+            :default-date="false"
+          />
+        </v-col>
 
-          <v-col md="5">
-            <select-dynamic
-              label="Item"
-              endpoint="/api/items"
-              :api-options="{ limit: 25, select: 'id,code,title' }"
-              item-text="title"
-              v-model="filter.column.item"
-            />
-          </v-col>
-        </v-layout>
+        <v-col md="5">
+          <select-dynamic
+            label="Item"
+            endpoint="/api/items"
+            :api-options="{ limit: 25, select: 'id,code,title' }"
+            item-text="title"
+            v-model="filter.column.item"
+          />
+        </v-col>
       </template>
     </breadcrumb>
 
@@ -104,6 +102,12 @@ export default {
       collection: false,
     },
   }),
+
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown
+    },
+  },
 
   methods: {
     open(item) {

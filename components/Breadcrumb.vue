@@ -1,6 +1,11 @@
 <template>
   <v-col cols="12">
-    <v-toolbar flat color="transparent" class="breadcrumb">
+    <v-toolbar
+      flat
+      color="transparent"
+      class="breadcrumb"
+      :class="{ mobile: isMobile }"
+    >
       <v-sheet flat class="d-flex align-center" color="transparent">
         <custom-icon v-if="icon">{{ icon }}</custom-icon>
         <span class="headline" :class="{ 'ml-1': !!icon }">{{ title }}</span>
@@ -68,7 +73,7 @@
               <span class="ml-2">Faça uma Busca</span>
             </v-card-title>
             <v-card-text>
-              <v-layout row>
+              <v-row>
                 <slot name="filter.one_line"></slot>
                 <v-col cols :md="isRoot || isAdmin ? 3 : 6">
                   <v-text-field
@@ -120,11 +125,11 @@
                     @change="$emit('perPage', $event)"
                   />
                 </v-col>
-              </v-layout>
+              </v-row>
 
-              <v-layout row class="mt-3">
-                <slot name="filters" :filter="filter"> </slot>
-              </v-layout>
+              <v-row class="mt-3" :class="{ 'flex-column': isMobile }">
+                <slot name="filters" :filter="filter"></slot>
+              </v-row>
             </v-card-text>
             <v-divider></v-divider>
             <v-card-actions>
@@ -332,6 +337,15 @@ export default {
   > .v-toolbar__content {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  &.mobile {
+    > .v-toolbar__content {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      height: auto !important;
+    }
   }
 }
 </style>

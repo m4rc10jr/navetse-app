@@ -12,7 +12,18 @@
           </column>
 
           <column md="8">
-            <input-text label="BI URL" v-model="form.bi_url" disabled />
+            <input-text
+              label="BI URL"
+              v-bind:value="
+                encodeURI(
+                  `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq `
+                ) +
+                `'` +
+                form.name +
+                `'`
+              "
+              disabled
+            />
           </column>
         </v-row>
 
@@ -85,6 +96,9 @@
                       @input="$v.form.options.entity_id.$touch"
                       :errorMessages="watchErrorMessages('options.entity_id')"
                     />
+                  </column>
+                  <column md="12">
+                    <uploader-logo :logo="form.logo" @send="prepareFiles" />
                   </column>
                 </v-row>
               </v-card-text>
@@ -250,12 +264,13 @@ export default {
 
     beforeSave(data) {
       const { companies = [], report, ...form } = data
-      // form.bi_url = encodeURI(
-      //   `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq ` +
-      //     `'` +
-      //     form.name +
-      //     `'`
-      // )
+      form.bi_url =
+        encodeURI(
+          `https://app.powerbi.com/reportEmbed?reportId=94d351a8-dd31-47fd-82ce-905f7e98456b&autoAuth=true&ctid=3f113021-bfc3-41d8-8541-b5727973136e&pageName=ReportSection11&filter=dim_empresas/EmpresaPai eq `
+        ) +
+        `'` +
+        form.name +
+        `'`
       return {
         ...form,
         companies: companies.map((h) => h.id),
@@ -264,6 +279,24 @@ export default {
 
     async afterSave() {
       await this.$store.dispatch('account/fetch')
+    },
+    async sendFile() {
+      let dataForm = new FormData()
+      for (let file of this.$refs.files.files) {
+        dataForm.append(`file`, file)
+      }
+      if (!dataForm.get('file')) {
+        return
+      }
+      let res = await this.$axios.$post(`/api/companies/logo`, dataForm)
+      this.form.logo = process.env.API_URL + '/storage/' + res.url
+    },
+    abreUpload() {
+      document.getElementById('upload').click()
+    },
+    prepareFiles(logo) {
+      this.form.logo = logo
+      this.$forceUpdate()
     },
   },
 

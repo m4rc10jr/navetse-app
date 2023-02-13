@@ -13,29 +13,28 @@
       }"
     >
       <template v-slot:filters>
-        <v-layout>
-          <v-col cols md="3">
-            <input-text label="Ocupação" v-model="filter.column.ocupation" />
-          </v-col>
+        <v-col cols md="3">
+          <input-text label="Ocupação" v-model="filter.column.ocupation" />
+        </v-col>
 
-          <v-col cols md="5">
-            <v-layout row>
-              <v-col cols>
-                <select-default
-                  label="Operador"
-                  v-model="filter.column.remuneration[0]"
-                  :items="filter.data.operators"
-                />
-              </v-col>
-              <v-col cols>
-                <input-currency
-                  label="Remuneração"
-                  v-model="filter.column.remuneration[1]"
-                />
-              </v-col>
-            </v-layout>
-          </v-col>
-        </v-layout>
+        <v-col cols md="5">
+          <v-row :class="{ 'flex-column': isMobile }">
+            <v-col cols>
+              <select-default
+                label="Operador"
+                v-model="filter.column.remuneration[0]"
+                :items="filter.data.operators"
+              />
+            </v-col>
+
+            <v-col cols>
+              <input-currency
+                label="Remuneração"
+                v-model="filter.column.remuneration[1]"
+              />
+            </v-col>
+          </v-row>
+        </v-col>
       </template>
     </breadcrumb>
 
@@ -140,6 +139,10 @@ export default {
   computed: {
     isNew() {
       return !this.item?.id
+    },
+
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown
     },
   },
 

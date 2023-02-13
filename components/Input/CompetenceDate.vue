@@ -16,7 +16,7 @@
 
 <script>
 import { orderBy } from 'lodash'
-
+import SelectDefault from '../Select/Default.vue'
 export default {
   props: {
     value: [String],
@@ -30,14 +30,13 @@ export default {
   },
 
   components: {
-    SelectDefault: () => import('../Select/Default'),
+    SelectDefault,
   },
 
   computed: {
     model: {
       get() {
         if (!this.value) {
-          console.log('data 1', this.$helper.moment().format('YYYY-MM-01'))
           this.$emit('input', this.$helper.moment().format('YYYY-MM-01'))
         }
 
@@ -50,10 +49,6 @@ export default {
     },
 
     dates() {
-      console.log(
-        'Mês de Compe',
-        orderBy(this.$helper.monthGenerator(), (h) => h.value, 'asc')
-      )
       return orderBy(this.$helper.monthGenerator(), (h) => h.value, 'asc')
     },
   },
@@ -70,6 +65,7 @@ export default {
         if (!factB || factB.length === 0) return false
         return factA[0] === factB[0]
       } catch (e) {
+        console.warn(e)
         return false
       }
     },

@@ -30,12 +30,8 @@
         <v-row>
           <v-col cols md="12">
             <v-card flat>
-              <!-- <v-toolbar flat>
-                <v-subheader class="pl-0">Dados Gerais</v-subheader>
-              </v-toolbar> -->
-
               <v-card-text class="pt-0 px-0">
-                <v-layout row class="mt-2">
+                <v-row class="mt-2">
                   <column md="3">
                     <input-date
                       v-model="$v.form.date.$model"
@@ -76,12 +72,12 @@
                       }"
                     />
                   </column>
-                </v-layout>
+                </v-row>
 
-                <v-layout row>
+                <v-row :class="{ mobile: $vuetify.breakpoint.xs }">
                   <column md="3">
                     <input-competence-date
-                      v-model.trim="$v.form.competence_date.$model"
+                      v-model="$v.form.competence_date.$model"
                       :error-messages="watchErrorMessages('competence_date')"
                     />
                   </column>
@@ -124,9 +120,9 @@
                       :error-messages="watchErrorMessages(`details.0.value`)"
                     />
                   </column>
-                </v-layout>
+                </v-row>
 
-                <v-layout row class="mb-0">
+                <v-row class="mb-0" :class="{ mobile: $vuetify.breakpoint.xs }">
                   <v-col md="12">
                     <v-textarea
                       label="Observações"
@@ -137,114 +133,10 @@
                       dense
                     />
                   </v-col>
-                </v-layout>
+                </v-row>
               </v-card-text>
             </v-card>
           </v-col>
-
-          <!-- <v-col cols md="6">
-            <v-card flat style="height: 100%">
-              <v-toolbar flat>
-                <v-subheader>Detalhamento</v-subheader>
-                <v-spacer></v-spacer>
-                <nav-items v-slot="{ mobile }">
-                  <v-btn
-                    :icon="mobile"
-                    small
-                    outlined
-                    @click="addSubItem"
-                    :disabled="onlyOneSubccount"
-                  >
-                    <custom-icon v-if="mobile">add</custom-icon>
-                    <span v-else>Gerar +1</span>
-                  </v-btn>
-
-                  <v-btn
-                    :icon="mobile"
-                    small
-                    outlined
-                    @click="removeAllSubItems"
-                  >
-                    <custom-icon v-if="mobile">delete</custom-icon>
-                    <span v-else>Remover Todos</span>
-                  </v-btn>
-                </nav-items>
-              </v-toolbar>
-
-              <v-card-text
-                style="min-height: 310px; overflow: auto"
-                class="pt-1 px-0"
-              >
-                <v-list class="pt-0">
-                  <v-slide-y-transition group>
-                    <v-list-item
-                      v-for="(detail, index) in $v.form.details.$each.$iter"
-                      :key="`input-detail-${index}`"
-                    >
-                      <div class="d-flex" :class="{ 'mt-3': index == 0 }">
-                        <select-dynamic
-                          label="Sub Conta"
-                          :data="orderBySubAccounts"
-                          no-api-data
-                          :item-text="(h) => h.title"
-                          v-model="detail.sub_account_id.$model"
-                          :input-options="{
-                            hideDetails: true,
-                          }"
-                          style="width: 300px"
-                          :error-messages="
-                            watchErrorMessages(
-                              `details.${index}.sub_account_id`
-                            )
-                          "
-                        />
-                        <v-divider class="mx-1" dark></v-divider>
-                        <input-currency
-                          label="Valor Liquido"
-                          v-model="detail.value.$model"
-                          style="width: 150px"
-                          :error-messages="
-                            watchErrorMessages(`details.${index}.value`)
-                          "
-                        />
-                        <v-divider class="mx-1" dark></v-divider>
-                        <v-btn
-                          icon
-                          small
-                          style="margin-top: 6px"
-                          @click.stop="removeSubItem(detail.$model, index)"
-                        >
-                          <custom-icon>delete</custom-icon>
-                        </v-btn>
-                      </div>
-                    </v-list-item>
-                  </v-slide-y-transition>
-
-                  <v-slide-y-transition mode="out-in">
-                    <v-list-item v-if="details.length <= 0" key="empty">
-                      <v-list-item-content>
-                        <v-alert type="info" outlined class="pa-1">
-                          Nenhuma sub conta foi vinculada ao lançamento!
-                        </v-alert>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-slide-y-transition>
-                </v-list>
-              </v-card-text>
-
-              <v-card-actions style="position: absolute; bottom: 20px">
-                <v-text-field
-                  label="Valor Liquido Total"
-                  :value="totalLiquid | brl"
-                  outlined
-                  disabled
-                  hide-details
-                  dense
-                  style="max-width: 180px"
-                />
-              </v-card-actions>
-            </v-card>
-          </v-col> -->
         </v-row>
 
         <v-divider class="py-1"></v-divider>

@@ -67,17 +67,15 @@ export default {
     },
 
     column() {
-      if (this.full) return 'col-12'
+      if (this.full || this.isMobile) return 'col-12'
 
       switch (this.$vuetify.breakpoint.name) {
         case 'xs':
-          return `col-${this.xs} column`
+          return `col-${this.xs}`
         case 'sm':
-          return `col-${this.sm} column`
-        case 'md':
-          return `col-${this.md} column`
+          return `col-${this.sm}`
         default:
-          return `col-${this.md} column`
+          return `col-${this.md}`
       }
     },
 
@@ -100,9 +98,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.column > .v-input {
-  // background-color: red;
-  max-height: 38px;
+<style lang="scss">
+.layout.row.mobile {
+  flex-direction: column;
 }
 </style>

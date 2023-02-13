@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'InputDoc',
 
@@ -67,6 +69,9 @@ export default {
     codes() {
       return this.items.sort((a, b) => a.code - b.code).filter((h) => h.code)
     },
+    ...mapGetters({
+      mainCompany: 'account/companyInUse',
+    }),
   },
 
   watch: {
@@ -104,8 +109,10 @@ export default {
       let params = {
         'scope[search][all]': search,
         'scope[search][paymentsnot]': true,
-        'scope[withTrashed]': Date.now(),
-        'where[type_payment_id]': 9, // cheque de cliente
+        'scope[withTrashed]': false,
+        'where[type_payment_id]': 7, // cheque
+        'where[origin_type]': 'sale',
+        'scope[search][company_id]': this.mainCompany.id,
         select: 'id,value,code',
         limit: 25,
       }

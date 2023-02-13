@@ -6,6 +6,7 @@
           endpoint="/api/companies"
           :api-options="{
             select: 'id,name',
+            limit: 9999,
           }"
           item-text="name"
           v-model="form.company_id"

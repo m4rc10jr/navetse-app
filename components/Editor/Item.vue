@@ -104,7 +104,6 @@
       <v-toolbar-title slot="header"
         >Item #{{ currentIndexOf + 1 }}</v-toolbar-title
       >
-      <pre>{{ itemsFiltered }}</pre>
       <v-card flat>
         <v-card-text class="pt-3">
           <!-- begin: form -->
@@ -361,7 +360,6 @@ export default {
     },
 
     itemsFiltered() {
-      console.log(this.model.department_id, this.itemsMultable)
       return [...this.itemsMultable].filter(
         (item) => item.department_id === this.model.department_id
       )
